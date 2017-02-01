@@ -9,6 +9,7 @@ void Network::open(string filename) {
     scheme.open(filename);
     int countLayer;
     vector<double*> currOut, prevOut;
+    vector<Neuron*>* prevLayer = NULL;
     vector<int> countNeurons;
     scheme >> countLayer;
     for (int i=0; i<countLayer; i++) {
@@ -23,6 +24,8 @@ void Network::open(string filename) {
             NeuronType type = i==0 ? NeuronType::Input : (i+1==countLayer ? NeuronType::Output : NeuronType::Hidden);
             Neuron* neuron = new Neuron(type);
             currOut.push_back(&neuron->output);
+            neuron->prevLayer = prevLayer;
+            //cout << &neuron->output << endl;
             int countWeight;
             vector<double> weight(i==0 ? 1 : countNeurons[i-1], ((double) rand() / (RAND_MAX)));
             if (scheme >> countWeight) {
@@ -37,6 +40,7 @@ void Network::open(string filename) {
             layer->addNeuron(neuron);
         }
         layers.push_back(layer);
+        prevLayer = &layer->neurons;
         prevOut = currOut;
         currOut.clear();
     }
@@ -89,4 +93,16 @@ vector<double> Network::process(vector<double> input) {
         layers[i]->process();
     }
     return layers[layers.size()-1]->getOutput();
+}
+
+void Network::learn(double speed, vector<double> input, double t) {
+    vector<double> output = process(input);
+    bool first = true;
+    for (unsigned i=layers.size()-1; i>0; i--) {
+        for (unsigned j=0; j<layers[i]->neurons.size(); j++) {
+            if (first) layers[i]->neurons[j]->learn(speed, t);
+            else layers[i]->neurons[j]->learn(speed);
+        }
+        first = false;
+    }
 }

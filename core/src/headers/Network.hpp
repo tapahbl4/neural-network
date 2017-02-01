@@ -10,7 +10,6 @@
 class Network {
 private:
     //ifstream scheme;
-    double speed;
     vector<Layer*> layers;
 public:
     Network();
@@ -19,7 +18,7 @@ public:
     vector<double> process(vector<double>);
     void printAll();
     void save(string);
-    void learn(vector<double>);
+    void learn(double speed, vector<double>, double t);
     double getError();
 
 };
