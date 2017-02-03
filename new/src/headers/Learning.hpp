@@ -5,14 +5,14 @@
 #include "NeuralNetwork.hpp"
 
 class Learning {
-private:
+protected:
     double speed;
-    unsigned iteration;
+    unsigned currentIteration;
     NeuralNetwork* network;
 public:
-    Learning(NeuralNetwork*, double);
-    void algorithmBackPropagation(ListDoubleP, double, unsigned);
-    void testBackPropagation();
+    // Learning(NeuralNetwork*, double);
+    // void algorithmBackPropagation(ListDoubleP, double, unsigned);
+    // void testBackPropagation();
 };
 
 #endif

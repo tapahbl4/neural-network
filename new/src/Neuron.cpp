@@ -1,6 +1,12 @@
 #include "headers/Neuron.hpp"
 
 /* constructor */
+Neuron::Neuron() {
+    // input = NULL;
+    bias = 0;
+    summator_value = output = 0;
+}
+
 Neuron::Neuron(ListDoubleP i, ListDouble w, double b) {
     input = i;
     weight = w;
@@ -22,7 +28,9 @@ void Neuron::setInput(ListDoubleP list) {
 }
 
 void Neuron::setInputAt(unsigned p, double* v) {
-    input[p] = v;
+    if (p>=input.size()) input.push_back(v);
+    else input[p] = v;
+    // cout << *v << endl;
 }
 
 /* bias */
@@ -49,6 +57,10 @@ void Neuron::setWeight(ListDouble list) {
 
 void Neuron::setWeightAt(unsigned p, double v) {
     weight[p] = v;
+}
+
+void Neuron::setWeightAdd(double v) {
+    weight.push_back(v);
 }
 
 /* output */
@@ -84,5 +96,11 @@ double Neuron::getSummatorValue() {
 
 /* other */
 void Neuron::process() {
-    //
+    double sum = summator();
+    output = activator(sum);
+    // cout << sum << endl;
+}
+
+unsigned Neuron::getLength() {
+    return weight.size();
 }

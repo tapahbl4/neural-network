@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <cmath>
+#include <iostream>
 
 enum NeuronType {Input, Hidden, Output};
 typedef std::vector<double*> ListDoubleP;
@@ -19,6 +20,7 @@ private:
     ListDouble  weight;
 public:
     /* constructor */
+    Neuron();
     Neuron(ListDoubleP, ListDouble, double);
     /* input */
     ListDoubleP getInput();
@@ -33,6 +35,7 @@ public:
     double getWeightAt(unsigned);
     void setWeight(ListDouble);
     void setWeightAt(unsigned, double);
+    void setWeightAdd(double);
     /* output */
     double* getOutputPointer();
     double getOutputValue();
@@ -42,6 +45,7 @@ public:
     double derivative(double);
     double getSummatorValue();
     /* other */
+    unsigned getLength();
     void process();
 };
 

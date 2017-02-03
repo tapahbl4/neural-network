@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <fstream>
+#include <iostream>
 #include "Neuron.hpp"
 
 typedef std::vector<Neuron*> ListNeuronP;
@@ -13,12 +14,18 @@ using namespace std;
 class NeuralNetwork {
 private:
     ListLayer layers;
-    Neuron* factory();
-    bool isReady
+    bool isReady;
 public:
     NeuralNetwork();
     void loadFromFile(string);
     void saveToFile(string);
+    void print();
+    ListDoubleP getOutputPointers(unsigned);
+    void process();
+    void setInput(ListDouble);
+    ListDouble getOutput();
+    void printOutput();
+    ListNeuronP getLayerAt(unsigned);
 };
 
 #endif
