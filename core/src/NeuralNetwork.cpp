@@ -5,6 +5,7 @@ NeuralNetwork::NeuralNetwork() {
 }
 
 void NeuralNetwork::loadFromFile(string filename) {
+    srand(time(0));
     unsigned layer_count;
     bool issetWeight;
     vector<unsigned> layers_neuron_count;
@@ -29,7 +30,7 @@ void NeuralNetwork::loadFromFile(string filename) {
             for (unsigned k=0; k<weightCount+1; k++) {
                 double w;
                 if (issetWeight) file >> w;
-                else w = 1;// TODO: ADD RANDOM;
+                else w = i==0 ? 1 : randone();
                 if (k==weightCount) { // set bias
                     neuron->setBias(w);
                 } else { // set i weight
@@ -87,7 +88,6 @@ ListDoubleP NeuralNetwork::getOutputPointers(unsigned n) {
     ListDoubleP outs;
     for (unsigned i=0; i<layers[n].size(); i++) {
         outs.push_back(layers[n][i]->getOutputPointer());
-        // cout << layers[n][i]->getOutputPointer() << " ";
     }
     return outs;
 }
@@ -124,4 +124,17 @@ void NeuralNetwork::process() {
 
 ListNeuronP NeuralNetwork::getLayerAt(unsigned n) {
     return layers[n];
+}
+
+unsigned NeuralNetwork::getLayersCount() {
+    return layers.size();
+}
+
+ListDouble NeuralNetwork::getDerivativesLayer(unsigned n) {
+    ListDouble result;
+    // cout << n << endl;//getLayerAt(n).size();
+    for (unsigned i=0; i<getLayerAt(n).size(); i++) {
+        result.push_back(getLayerAt(n)[i]->derivative(getLayerAt(n)[i]->getSummatorValue()));
+    }
+    return result;
 }

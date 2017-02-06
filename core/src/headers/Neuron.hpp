@@ -5,38 +5,50 @@
 #include <cmath>
 #include <iostream>
 
-//#include "Layer.hpp"
+enum NeuronType {Input, Hidden, Output};
+typedef std::vector<double*> ListDoubleP;
+typedef std::vector<double>  ListDouble;
 
 using namespace std;
 
-enum NeuronType {Input, Hidden, Output};
-
 class Neuron {
 private:
-    double bias;
-    NeuronType type;
-public:
+    double summator_value;
     double output;
-    double sum;
-    vector<double*> input;
-    vector<double> weight;
-
-    vector<Neuron*>* prevLayer;
-    double error; // (t-y)*f'(sum)
-    double delta; // speed*error*input
-    double delta_bias; // speed*error
-
-
-    Neuron(NeuronType type);
-    void setInput(double bias, vector<double*> input, vector<double> weight);
-    double getOutput();
+    double bias;
+    ListDoubleP input;
+    ListDouble  weight;
+public:
+    /* constructor */
+    Neuron();
+    Neuron(ListDoubleP, ListDouble, double);
+    /* input */
+    ListDoubleP getInput();
+    double* getInputAt(unsigned);
+    void setInput(ListDoubleP);
+    void setInputAt(unsigned, double*);
+    /* bias */
+    double getBias();
+    void setBias(double);
+    void correctBias(double);
+    /* weight */
+    ListDouble getWeight();
+    double getWeightAt(unsigned);
+    void setWeight(ListDouble);
+    void setWeightAt(unsigned, double);
+    void setWeightAdd(double);
+    void correctWeightAt(unsigned, double);
+    /* output */
+    double* getOutputPointer();
+    double getOutputValue();
+    /* body */
     double summator();
     double activator(double);
     double derivative(double);
+    double getSummatorValue();
+    /* other */
+    unsigned getLength();
     void process();
-    void calcError();
-    void learn(double);
-    void learn(double,double);
 };
 
 #endif

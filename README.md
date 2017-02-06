@@ -1,5 +1,5 @@
 # Neural network for forecasting exchange rates
-#### Education work
+*Education work*  
 Description  
 Description  
 Description  
@@ -12,6 +12,8 @@ i line: synapse count on current neuron M
 i+1 line: M numbers - each neuron weight  
 
 ## Compile and launch
-$ cd new/  
+Unpack archive and run this commands
+$ cd neural-network/core/  
+$ make prepare  
 $ make  
 $ ./bin/nn

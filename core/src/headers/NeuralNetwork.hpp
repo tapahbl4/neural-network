@@ -6,6 +6,9 @@
 #include <iostream>
 #include "Neuron.hpp"
 
+#define rangerand(A,B) rand() % B + A
+#define randone() ((double) rand() / (RAND_MAX))
+
 typedef std::vector<Neuron*> ListNeuronP;
 typedef std::vector<ListNeuronP> ListLayer;
 
@@ -26,6 +29,8 @@ public:
     ListDouble getOutput();
     void printOutput();
     ListNeuronP getLayerAt(unsigned);
+    unsigned getLayersCount();
+    ListDouble getDerivativesLayer(unsigned);
 };
 
 #endif

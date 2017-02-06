@@ -1,4 +1,4 @@
-// #include "headers/Learning.hpp"
+#include "headers/Learning.hpp"
 //
 // Learning::Learning(NeuralNetwork* target, double s) {
 //     speed = s;
@@ -15,3 +15,11 @@
 // void Learning::testBackPropagation() {
 //     //
 // }
+
+double Learning::getSpeed() {
+    return speed;
+}
+
+void Learning::setSpeed(double s) {
+    speed = s;
+}
