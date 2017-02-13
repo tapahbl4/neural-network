@@ -20,14 +20,14 @@ private:
     bool isReady;
 public:
     NeuralNetwork();
-    void loadFromFile(string);
+    void loadFromFile(string, bool);
     void saveToFile(string);
     void print();
     ListDoubleP getOutputPointers(unsigned);
     void process();
     void setInput(ListDouble);
     ListDouble getOutput();
-    void printOutput();
+    void printOutput(string);
     ListNeuronP getLayerAt(unsigned);
     unsigned getLayersCount();
     ListDouble getDerivativesLayer(unsigned);

@@ -10,8 +10,8 @@ class LearningBackPropagation : public Learning {
 private:
     ListDouble learnData;
 public:
-    LearningBackPropagation(NeuralNetwork*, double, ListDouble);
-    void start(unsigned, unsigned);
+    LearningBackPropagation(NeuralNetwork*);
+    void start(ListDouble, double, unsigned, unsigned);
     void iteration(ListDouble, ListDouble);
     void log();
     double test(ListDouble);

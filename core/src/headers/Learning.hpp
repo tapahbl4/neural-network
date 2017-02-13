@@ -1,6 +1,7 @@
 #ifndef LEARNING_HPP
 #define LEARNING_HPP
 
+#include <cmath>
 #include "Neuron.hpp"
 #include "NeuralNetwork.hpp"
 

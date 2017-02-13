@@ -4,7 +4,7 @@ NeuralNetwork::NeuralNetwork() {
     isReady = false;
 }
 
-void NeuralNetwork::loadFromFile(string filename) {
+void NeuralNetwork::loadFromFile(string filename, bool onlyScheme = false) {
     srand(time(0));
     unsigned layer_count;
     bool issetWeight;
@@ -18,6 +18,7 @@ void NeuralNetwork::loadFromFile(string filename) {
         layers_neuron_count.push_back(t);
     }
     file >> issetWeight; // 3 line
+    if (onlyScheme) issetWeight = false;
     for (unsigned i=0; i<layer_count; i++) { // for each layer
         ListNeuronP layer;
         ListDoubleP prevOutputs;
@@ -108,10 +109,17 @@ ListDouble NeuralNetwork::getOutput() {
     return result;
 }
 
-void NeuralNetwork::printOutput() {
+void NeuralNetwork::printOutput(string filename) {
+    ofstream file(filename);
     ListDouble result = getOutput();
-    for (unsigned i=0; i<result.size(); i++) cout << result[i] << " ";
-    cout << endl;
+    for (unsigned i=0; i<result.size(); i++)
+        if (filename=="stdout") cout << result[i] << " ";
+        else file << result[i] << " ";
+    if (filename=="stdout") cout << endl;
+    else {
+        file << endl;
+        file.close();
+    }
 }
 
 void NeuralNetwork::process() {
