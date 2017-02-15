@@ -8,7 +8,7 @@ myfile = open('timeline.txt', 'w')
 myfile2 = open('currency.txt', 'w')
 prev = -1
 cur_id = 145
-for i in range(2000, 2018):
+for i in range(2010, 2018):
     print(i)
     r = requests.get('http://www.nbrb.by/API/ExRates/Rates/Dynamics/'+str(cur_id)+'?startDate=01/01/'+str(i)+'&endDate=01/01/'+str(i+1))
     full_list = json.loads(r.text)
