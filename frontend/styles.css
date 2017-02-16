@@ -1,0 +1,28 @@
+body, html {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    background: lightgray;
+}
+
+.main {
+    background: gray;
+    max-width: 800px;
+    margin: 0 auto;
+    height: 100%;
+}
+
+.histogram {
+    width: 100%;
+    height: 300px;
+    background: #fff;
+    text-align: center;
+}
+.histogram .item {
+    background: yellow;
+    min-width: 10px;
+    max-height: 100%;
+}
