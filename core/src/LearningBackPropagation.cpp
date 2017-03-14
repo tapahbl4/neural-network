@@ -79,6 +79,5 @@ double LearningBackPropagation::test(ListDouble testData) {
 }
 
 void LearningBackPropagation::log() {
-    // cout << "Iteration " << currentIteration << ", (speed: " << speed << ", error: " << summaryError/currentIteration*100 << ")" << endl;
     cout << "Iteration " << currentIteration << ", (speed: " << speed << ")" << endl;
 }

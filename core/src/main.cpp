@@ -10,6 +10,12 @@
 
 using namespace std;
 
+
+/**
+ * Load data from text file
+ * @param  filename File name with path
+ * @return          String vector of data
+ */
 ListDouble loadData(string filename) {
     ifstream file(filename);
     ListDouble result;
@@ -20,6 +26,12 @@ ListDouble loadData(string filename) {
     return result;
 }
 
+/**
+ * Main function
+ * @param  argc Arguments count
+ * @param  argv Arguments array
+ * @return      Exit code
+ */
 int main(int argc, char** argv) {
     bool learn = false, test = false, process = false;
     double speed = 0;
@@ -76,7 +88,7 @@ int main(int argc, char** argv) {
             continue;
         }
     }
-    // run with cli params
+    // Running with CLI params
     NeuralNetwork* network = new NeuralNetwork();
     network->loadFromFile(inputfile, false);
     if (learn) {

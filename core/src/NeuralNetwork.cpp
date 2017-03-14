@@ -140,7 +140,6 @@ unsigned NeuralNetwork::getLayersCount() {
 
 ListDouble NeuralNetwork::getDerivativesLayer(unsigned n) {
     ListDouble result;
-    // cout << n << endl;//getLayerAt(n).size();
     for (unsigned i=0; i<getLayerAt(n).size(); i++) {
         result.push_back(getLayerAt(n)[i]->derivative(getLayerAt(n)[i]->getSummatorValue()));
     }

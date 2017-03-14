@@ -5,6 +5,9 @@
 #include "Neuron.hpp"
 #include "NeuralNetwork.hpp"
 
+/**
+ * Parent for learning classes
+ */
 class Learning {
 protected:
     double speed;
@@ -13,9 +16,7 @@ protected:
     NeuralNetwork* network;
     double summaryError;
 public:
-    // Learning(NeuralNetwork*, double);
-    // void algorithmBackPropagation(ListDoubleP, double, unsigned);
-    // void testBackPropagation();
+    /* Get and set speed param */
     double getSpeed();
     void setSpeed(double);
 };

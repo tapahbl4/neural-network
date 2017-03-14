@@ -2,7 +2,6 @@
 
 /* constructor */
 Neuron::Neuron() {
-    // input = NULL;
     bias = 0;
     summator_value = output = 0;
 }
@@ -97,7 +96,6 @@ double Neuron::getSummatorValue() {
 void Neuron::process() {
     double sum = summator();
     output = activator(sum);
-    // cout << sum << endl;
 }
 
 unsigned Neuron::getLength() {
