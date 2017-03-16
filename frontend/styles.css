@@ -1,28 +1,20 @@
-body, html {
-    width: 100%;
-    height: 100%;
-}
-
 body {
-    margin: 0;
     background: lightgray;
+    font-family: 'Open Sans', sans-serif;
 }
 
-.main {
+header {
     background: gray;
-    max-width: 800px;
-    margin: 0 auto;
-    height: 100%;
+    color: white;
+    padding: 0.5em 0;
+    font-size: 1.5em;
+    font-weight: bold;
 }
 
-.histogram {
-    width: 100%;
-    height: 300px;
-    background: #fff;
-    text-align: center;
+article {
+    padding: 1em 0;
 }
-.histogram .item {
-    background: yellow;
-    min-width: 10px;
-    max-height: 100%;
+
+footer {
+    border-top: 1px solid gray;
 }
