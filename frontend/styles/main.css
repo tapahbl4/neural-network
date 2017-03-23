@@ -1,0 +1,49 @@
+body {
+    background: lightgray;
+    background: url('../images/bg1.jpg');
+    font-family: 'Open Sans', sans-serif;
+    color: #eee;
+}
+
+header {
+    background: gray;
+    color: white;
+    padding: 0.5em 0;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+header .title,
+article .content,
+article nav,
+footer .inner,
+.fixed-width {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+article {
+    /*padding: 1em 0;*/
+}
+
+article nav {
+    padding: .3em 0;
+}
+
+footer {
+    margin-top: 20px;
+    padding-top: 10px;
+    border-top: 2px solid gray;
+}
+
+.navbar {
+    border-radius: 0;
+}
+
+.navbar-brand {
+    /*padding: 15px 0;*/
+}
+
+.external-link {
+    border-bottom: 1px dotted;
+}
