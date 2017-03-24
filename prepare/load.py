@@ -1,0 +1,27 @@
+#!/usr/bin/env python
+# -*- coding: UTF-8 -*-
+import cgitb
+import json
+import string
+import os
+cgitb.enable()
+
+roundcount = 4
+filenew = open('currency.txt', 'r')
+timeline = []
+json_array = []
+for_nn = []
+for n in filenew:
+    arr = string.split(n, ' ')
+    arr[1] = float(arr[1])
+    arr[2] = round(float(arr[2]), roundcount)
+    for_nn.append(arr[2])
+    timeline.append(arr)
+
+print("Content-Type: text/plain;charset=utf-8\n")
+
+
+
+for n in timeline[-16:]:
+    json_array.append(n)
+print(json.dumps(json_array))

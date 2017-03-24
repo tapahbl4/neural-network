@@ -1,8 +1,8 @@
 body {
-    background: lightgray;
-    background: url('../images/bg1.jpg');
+    background: #ececec;
+    /*background: url('../images/bg0.jpg');*/
     font-family: 'Open Sans', sans-serif;
-    color: #eee;
+    /*color: #eee;*/
 }
 
 header {
@@ -18,12 +18,8 @@ article .content,
 article nav,
 footer .inner,
 .fixed-width {
-    max-width: 800px;
+    max-width: 960px;
     margin: 0 auto;
-}
-
-article {
-    /*padding: 1em 0;*/
 }
 
 article nav {
@@ -41,7 +37,8 @@ footer {
 }
 
 .navbar-brand {
-    /*padding: 15px 0;*/
+    padding: 14px;
+    font-weight: bold;
 }
 
 .external-link {

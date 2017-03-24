@@ -2,6 +2,7 @@
 
 import json
 import requests
+import string
 
 myfile = open('timeline.txt', 'w')
 myfile2 = open('currency.txt', 'w')
@@ -19,8 +20,11 @@ for i in range(2010, 2018):
         full_list.append(f1[0])
     for j in full_list:
         if prev != -1:
-            myfile.write(str(j['Cur_OfficialRate'] / prev) + '\n')
-            myfile2.write(str(j['Cur_OfficialRate']) + '\n')
+            cur_str = str(j['Cur_OfficialRate'] / prev)
+            date_f = string.split(j['Date'], 'T')[0]
+            date_f = date_f.replace('-', '.')
+            myfile.write(cur_str + '\n')
+            myfile2.write(date_f + ' ' + str(j['Cur_OfficialRate']) + ' ' + cur_str + '\n')
         prev = j['Cur_OfficialRate']
         if j['Date'] == '2015-12-31T00:00:00':
             print('деноминация')
