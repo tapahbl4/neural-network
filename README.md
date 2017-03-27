@@ -1,8 +1,5 @@
 # Neural network for forecasting exchange rates
-*Education work*  
-Description  
-Description  
-Description  
+*Education work*   
 
 ## Configuration file
 1 line: layers count N  
@@ -13,11 +10,15 @@ i+1 line: M numbers - each neuron weight
 
 ## Compile and launch
 Unpack archive and run this commands
+```bash
 $ cd neural-network/core/  
 $ make prepare  
 $ make  
+```
 For launch use  
+```bash
 $ ./bin/nn  
+```
 Parameters list:  
 -v (--version) - print version and developer  
 -h (--help) - print help  
@@ -30,3 +31,15 @@ Parameters list:
 --iteration - counts of learning iteration (if data file is large)
 --log - print info about learning each N iterations  
 If you launch without --output, then application will printing in stdout.   
+
+## Install frontend
+For example, i'm using apache
+```bash
+$ cd neural-network
+$ sudo -i
+$ ln -s frontend /var/www/neural-network-frontend
+$ echo "\n 127.0.0.1 yourdomain.loc" >> /etc/hosts
+$ cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/nn-frontend.conf
+...
+$ systemctl restart apache2
+```

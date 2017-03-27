@@ -7,7 +7,7 @@ import os
 cgitb.enable()
 
 roundcount = 4
-filenew = open('currency.txt', 'r')
+filenew = open('data/currency.txt', 'r')
 timeline = []
 json_array = []
 for_nn = []
