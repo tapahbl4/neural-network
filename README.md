@@ -2,11 +2,11 @@
 *Education work*   
 
 ## Configuration file
-1 line: layers count N  
-2 line: N numbers - neuron count on each layer  
-3 line: if next data it's neuron weight then 1 else 0  
-i line: synapse count on current neuron M  
-i+1 line: M numbers - each neuron weight  
+1. Layers count **N**  
+2. **N** numbers - neuron count on each layer  
+3. If next data it's neuron weight then *1* else *0*  
+4. **i** line: synapse count on current neuron **M**  
+5. **i+1** line: **M** numbers - each neuron weight  
 
 ## Compile and launch
 Unpack archive and run this commands
@@ -15,31 +15,38 @@ $ cd neural-network/core/
 $ make prepare  
 $ make  
 ```
-For launch use  
+
+For launch use
 ```bash
 $ ./bin/nn  
 ```
+
 Parameters list:  
--v (--version) - print version and developer  
--h (--help) - print help  
--l (--learn) - launch neural network for learning (required params: -s, -d, -i, -o)  
--t (--test) - testing neural network (required params: -d, -i)  
--p (--process) - processing neural network (required params: -d, -i)  
--i (--input) - input file with scheme (and weights for neurons)  
--o (--output) - output file for learning, testing or processing   result
--d (--data) -  data file for learning, testing or processing neural network  
---iteration - counts of learning iteration (if data file is large)
---log - print info about learning each N iterations  
-If you launch without --output, then application will printing in stdout.   
+Long               |Short        |Meaning                                                     |Required params
+-------------------|-------------|------------------------------------------------------------|-------------------
+`--version`        |`-v`         |Print version and developer                                 |None
+`--help`           |`-h`         |Print help                                                  |None
+`--learn`          |`-l`         |Launch neural network for learning                          |`-s` `-d` `-i` `-o`
+`--test`           |`-t`         |Testing neural network                                      |`-d` `-i`
+`--process`        |`-p`         |Processing neural network                                   |`-d` `-i`
+`--input filename` |`-i filename`|Input file with scheme (and weights for neurons)            |None
+`--output filename`|`-o filename`|output file for learning, testing or processing result      |None
+`--data filename`  |`-d filename`|Data file for learning, testing or processing neural network|None
+`--iteration N`    |None         |Counts of learning iteration (if data file is large)        |None
+`--log N`          |None         |Print info about learning each **N** iterations             |None
+If you launch without `--output`, then application will printing in stdout.   
 
 ## Install frontend
-For example, i'm using apache
+For example, i'm using apache  
+Frontend works **without** PHP and DB
 ```bash
 $ cd neural-network
 $ sudo -i
 $ ln -s frontend /var/www/neural-network-frontend
-$ echo "\n 127.0.0.1 yourdomain.loc" >> /etc/hosts
-$ cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/nn-frontend.conf
-...
+$ echo "\n127.0.0.1 yourdomain.loc" >> /etc/hosts
+$ cd /etc/apache2/sites-available/
+$ cp 000-default.conf nn-frontend.conf
+$ nano nn-frontend.conf
+### change domain and destination folder ###
 $ systemctl restart apache2
 ```
