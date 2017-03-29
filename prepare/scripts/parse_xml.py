@@ -4,8 +4,8 @@ import json
 import requests
 import string
 
-myfile = open('timeline.txt', 'w')
-myfile2 = open('currency.txt', 'w')
+myfile = open('../data/timeline.txt', 'w')
+myfile2 = open('../data/currency.txt', 'w')
 prev = -1
 cur_id = 145
 apiroot = 'http://www.nbrb.by/API/ExRates/Rates/Dynamics/'

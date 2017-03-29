@@ -21,7 +21,7 @@ For launch use
 $ ./bin/nn  
 ```
 
-Parameters list:  
+####Parameters list
 Long               |Short        |Meaning                                                     |Required params
 -------------------|-------------|------------------------------------------------------------|-------------------
 `--version`        |`-v`         |Print version and developer                                 |None
@@ -34,15 +34,17 @@ Long               |Short        |Meaning                                       
 `--data filename`  |`-d filename`|Data file for learning, testing or processing neural network|None
 `--iteration N`    |None         |Counts of learning iteration (if data file is large)        |None
 `--log N`          |None         |Print info about learning each **N** iterations             |None
-If you launch without `--output`, then application will printing in stdout.   
+
+> If you launch without `--output`, then application will printing in **stdout**.   
 
 ## Install frontend
 For example, i'm using apache  
 Frontend works **without** PHP and DB
 ```bash
-$ cd neural-network
+$ cd /path/to/apache2 # Ubuntu: /var/www
+$ ln -s /path/to/neural-network
+$ chmod o+x neural-network
 $ sudo -i
-$ ln -s frontend /var/www/neural-network-frontend
 $ echo "\n127.0.0.1 yourdomain.loc" >> /etc/hosts
 $ cd /etc/apache2/sites-available/
 $ cp 000-default.conf nn-frontend.conf
