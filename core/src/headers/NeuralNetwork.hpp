@@ -12,7 +12,7 @@
  * @param  B Number
  * @return   Result
  */
-#define rangerand(A,B) rand() % B + A
+#define rangerand(A,B) (static_cast <double> (rand()) % B + A)
 /**
  * Random number between 0 and 1
  * @return Result

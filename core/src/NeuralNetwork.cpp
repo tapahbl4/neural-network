@@ -1,5 +1,13 @@
 #include "headers/NeuralNetwork.hpp"
 
+// TODO: Remove
+double RandomDouble(double min, double max)
+{
+    double random = ((double) rand()) / (double) RAND_MAX;
+    double range = max - min;
+    return (random*range) + min;
+}
+
 NeuralNetwork::NeuralNetwork() {
     isReady = false;
 }
@@ -31,7 +39,7 @@ void NeuralNetwork::loadFromFile(string filename, bool onlyScheme = false) {
             for (unsigned k=0; k<weightCount+1; k++) {
                 double w;
                 if (issetWeight) file >> w;
-                else w = i==0 ? 1 : randone();
+                else w = i==0 ? 1 : RandomDouble(-0.5, 0.5);//randone();
                 if (k==weightCount) { // set bias
                     neuron->setBias(w);
                 } else { // set i weight
@@ -96,7 +104,6 @@ ListDoubleP NeuralNetwork::getOutputPointers(unsigned n) {
 void NeuralNetwork::setInput(ListDouble inputVector) {
     for (unsigned i=0; i<layers[0].size(); i++) {
         layers[0][i]->setInputAt(0, &(inputVector[i]));
-        // cout << &(inputVector[i]) << " ";
     }
 }
 
@@ -110,7 +117,8 @@ ListDouble NeuralNetwork::getOutput() {
 }
 
 void NeuralNetwork::printOutput(string filename) {
-    ofstream file(filename);
+    ofstream file;
+    if (filename!="stdout") file.open(filename);
     ListDouble result = getOutput();
     for (unsigned i=0; i<result.size(); i++)
         if (filename=="stdout") cout << result[i] << " ";

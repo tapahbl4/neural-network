@@ -1,27 +1,44 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: UTF-8 -*-
 import cgitb
 import json
-import string
-import os
+import subprocess
+# import time # TODO: Remove
 cgitb.enable()
 
-roundcount = 4
-filenew = open('data/currency.txt', 'r')
-timeline = []
-json_array = []
-for_nn = []
-for n in filenew:
-    arr = string.split(n, ' ')
-    arr[1] = float(arr[1])
-    arr[2] = round(float(arr[2]), roundcount)
-    for_nn.append(arr[2])
-    timeline.append(arr)
+file_currency = open("data/currency.txt", "r")
+
+schema_input = 5
+days = 15
+
+array_currency = []
+
+for item in file_currency:
+    arr = item.split()
+    in_arr = {'date': arr[0], 'value': arr[1], 'fraction': arr[2]}
+    array_currency.append(in_arr)
+file_currency.close()
+
+array_last = array_currency[-(schema_input + days):]
+nn_answer = []
+for item in array_last[schema_input:]:
+    item_pos = array_last.index(item)
+    for_write = array_last[item_pos - schema_input:item_pos]
+    file_process = open('data/data_process.txt', 'w')
+    for i in for_write:
+        file_process.write(i['fraction']+"\n")
+    file_process.close()
+    process_cmd =  '../core/bin/nn --process -d data/data_process.txt -i data/schema.txt'
+    result = subprocess.run(process_cmd.split(), stdout = subprocess.PIPE)
+    nn_answer.append(result.stdout.decode('utf-8')[:-2])
+
+prev = float(array_last[schema_input-1]['value'])
+for item in array_last[schema_input:]:
+    item_pos = array_last.index(item)
+    prev *= float(nn_answer[item_pos-schema_input])
+    item.update({'forecast': str(round(float(prev) * float(nn_answer[item_pos-schema_input]), 4))})
+    item['fraction'] = nn_answer[item_pos-schema_input] # abs(float(item['fraction'])-float(item['forecast']))
+    # del item['fraction']
 
 print("Content-Type: text/plain;charset=utf-8\n")
-
-
-
-for n in timeline[-16:]:
-    json_array.append(n)
-print(json.dumps(json_array))
+print(json.dumps(array_last[schema_input:]))

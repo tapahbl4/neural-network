@@ -74,7 +74,7 @@ double LearningBackPropagation::test(ListDouble testData) {
         sum /= output.size();
         global_sum += sum;
     }
-    global_sum /= testCount;
+    global_sum /= testCount-1;
     return sqrt(global_sum)*100;
 }
 

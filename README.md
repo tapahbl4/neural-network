@@ -21,19 +21,20 @@ For launch use
 $ ./bin/nn  
 ```
 
-####Parameters list
-Long               |Short        |Meaning                                                     |Required params
--------------------|-------------|------------------------------------------------------------|-------------------
-`--version`        |`-v`         |Print version and developer                                 |None
-`--help`           |`-h`         |Print help                                                  |None
-`--learn`          |`-l`         |Launch neural network for learning                          |`-s` `-d` `-i` `-o`
-`--test`           |`-t`         |Testing neural network                                      |`-d` `-i`
-`--process`        |`-p`         |Processing neural network                                   |`-d` `-i`
-`--input filename` |`-i filename`|Input file with scheme (and weights for neurons)            |None
-`--output filename`|`-o filename`|output file for learning, testing or processing result      |None
-`--data filename`  |`-d filename`|Data file for learning, testing or processing neural network|None
-`--iteration N`    |None         |Counts of learning iteration (if data file is large)        |None
-`--log N`          |None         |Print info about learning each **N** iterations             |None
+#### Parameters list
+|Long           |Short    |Meaning                                                     |Required params    |
+|---------------|---------|------------------------------------------------------------|-------------------|
+|`--version`    |`-v`     |Print version and developer                                 |None               |
+|`--help`       |`-h`     |Print help                                                  |None               |
+|`--learn`      |`-l`     |Launch neural network for learning                          |`-s` `-d` `-i` `-o`|
+|`--test`       |`-t`     |Testing neural network                                      |`-d` `-i`          |
+|`--process`    |`-p`     |Processing neural network                                   |`-d` `-i`          |
+|`--input file` |`-i file`|Input file with scheme (and weights for neurons)            |None               |
+|`--output file`|`-o file`|output file for learning, testing or processing result      |None               |
+|`--data file`  |`-d file`|Data file for learning, testing or processing neural network|None               |
+|`--speed D`    |`-s D`   |Learning speed                                              |None               |
+|`--iteration N`|None     |Counts of learning iteration (if data file is large)        |None               |
+|`--log N`      |None     |Print info about learning each **N** iterations             |None               |
 
 > If you launch without `--output`, then application will printing in **stdout**.   
 
@@ -50,5 +51,6 @@ $ cd /etc/apache2/sites-available/
 $ cp 000-default.conf nn-frontend.conf
 $ nano nn-frontend.conf
 ### change domain and destination folder ###
+$ a2ensite nn-frontend
 $ systemctl restart apache2
 ```

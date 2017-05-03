@@ -44,3 +44,14 @@ footer {
 .external-link {
     border-bottom: 1px dotted;
 }
+
+.main-menu {
+    border: 0;
+}
+
+.main-menu li a {
+    border: 0 !important;
+    border-radius: 0 !important;
+    text-decoration: none !important;
+    margin: 0 !important;
+}
