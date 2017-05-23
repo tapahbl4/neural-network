@@ -12,6 +12,7 @@
 class LearningBackPropagation : public Learning {
 private:
     ListDouble learnData;
+    double error;
 public:
     /* Default constructor */
     LearningBackPropagation(NeuralNetwork*);

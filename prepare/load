@@ -28,7 +28,7 @@ for item in array_last[schema_input:]:
     for i in for_write:
         file_process.write(i['fraction']+"\n")
     file_process.close()
-    process_cmd =  '../core/bin/nn --process -d data/data_process.txt -i data/schema.txt'
+    process_cmd =  '../core/bin/nn --process -d data/data_process.txt -i data/schema_output.txt'
     result = subprocess.run(process_cmd.split(), stdout = subprocess.PIPE)
     nn_answer.append(result.stdout.decode('utf-8')[:-2])
 

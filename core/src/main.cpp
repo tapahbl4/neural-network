@@ -95,7 +95,9 @@ int main(int argc, char** argv) {
         ListDouble data = loadData(datafile);
         LearningBackPropagation* learning = new LearningBackPropagation(network);
         learning->start(data, speed, iteration!=0 ? iteration : data.size(), printlog);
-        network->saveToFile(outputfile);
+        if (outputfile!="stdout") {
+            network->saveToFile(outputfile);
+        }
     }
     if (test) {
         ListDouble data = loadData(datafile);
