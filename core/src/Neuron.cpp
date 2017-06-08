@@ -2,7 +2,6 @@
 
 /* constructor */
 Neuron::Neuron() {
-    // input = NULL;
     bias = 0;
     summator_value = output = 0;
 }
@@ -82,11 +81,16 @@ double Neuron::summator() {
 }
 
 double Neuron::activator(double x) {
-    return 1.0 / (1.0 + exp(-x));
+    double a = 3;
+    return (2.0 / (1 + exp(-a*x))) - 1;
+    // if (x>0) return 1;
+    // else if (x<0) return -1;
+    // else return 0;
 }
 
 double Neuron::derivative(double x) {
-    return activator(x)*(1.0 - activator(x));
+    double a = 2.5;
+    return (2 * a * exp(a*x)) / ((exp(a*x) + 1) * (exp(a*x) + 1));
 }
 
 double Neuron::getSummatorValue() {
@@ -97,7 +101,6 @@ double Neuron::getSummatorValue() {
 void Neuron::process() {
     double sum = summator();
     output = activator(sum);
-    // cout << sum << endl;
 }
 
 unsigned Neuron::getLength() {

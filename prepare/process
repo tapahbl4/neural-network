@@ -1,0 +1,68 @@
+#!/usr/bin/env python3
+# -*- coding: UTF-8 -*-
+import cgitb
+import json
+import subprocess
+import sys
+# cgitb.enable()
+
+start_day = sys.argv[1]
+
+roundcount = 4
+result = subprocess.run(['python', 'parse_api_data.py'], stdout = subprocess.PIPE)
+# print(result.stdout.decode('utf-8')) # выведет данные о загрузке информации с сервера НБРБ
+
+currency_file = open('data/currency.txt', 'r')
+data_learn_file = open('data/data_learn.txt', 'w')
+data_test_file = open('data/data_test.txt', 'w')
+data_process_file = open('data/data_process.txt', 'w')
+schema_file = open('data/schema.txt', 'w')
+currency_array = []
+
+for n in currency_file:
+    arr = n.split(' ')
+    item = {'date': arr[0], 'currency': arr[1], 'frac': round(float(arr[2]), roundcount)}
+    currency_array.append(item)
+
+for_learn = 1000
+for_test = 100
+for_process = 5
+for n in range(-(for_learn + for_test + for_process), 0):
+    if abs(n) <= for_process:
+        data_process_file.write(str(currency_array[n]['frac']) + '\n')
+    elif abs(n) <= for_test + for_process:
+        data_test_file.write(str(currency_array[n]['frac']) + '\n')
+    else:
+        data_learn_file.write(str(currency_array[n]['frac']) + '\n')
+
+schema_string = "4\n5 8 7 1\n0\n"
+schema_file.write(schema_string)
+
+data_learn_file.close()
+data_test_file.close()
+data_process_file.close()
+schema_file.close()
+
+# prefix_cmd = '../core/bin/nn '
+# learn_cmd = prefix_cmd + '--learn -s 0.01 -d data/data_learn.txt -i data/schema.txt -o data/schema.txt'
+# test_cmd = prefix_cmd + '--test -d data/data_test.txt -i data/schema.txt'
+# process_cmd =  prefix_cmd + '--process -d data/data_process.txt -i data/schema.txt'
+#
+# result = subprocess.run(learn_cmd.split(), stdout = subprocess.PIPE)
+# result_test = subprocess.run(test_cmd.split(), stdout = subprocess.PIPE)
+# result_process = subprocess.run(process_cmd.split(), stdout = subprocess.PIPE)
+#
+# print("Ошибка: "+result_test.stdout.decode('utf-8')[:-1]+'%')
+# print("Результат: "+result_process.stdout.decode('utf-8')[:-1])
+#
+# answer = {
+#     'error': result_test.stdout.decode('utf-8')[:-1],
+#     'result': result_process.stdout.decode('utf-8')[:-1]
+#     # 'neural_network':
+# }
+
+# print("Content-Type: text/plain;charset=utf-8\n")
+#
+# for n in timeline[-16:]:
+#     json_array.append(n)
+# print(json.dumps(json_array))

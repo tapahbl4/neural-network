@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Neural network</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700"/>
+    <link rel="stylesheet" href="/frontend/styles/bootstrap3.min.css"/>
+    <link rel="stylesheet" href="/frontend/styles/main.css"/>
+    <script src="/frontend/js/jquery.js"></script>
+    <script src="/frontend/js/bootstrap3.min.js"></script>
+    <script src="/frontend/js/Chart.min.js"></script>
+    <script src="/frontend/js/main.js"></script>
+</head>
+<body>
+    <nav class="navbar navbar-inverse" role="navigation">
+        <div class="container-fluid fixed-width">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand i18n" href="#">Neural Network</a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-menu">
+                <ul class="nav navbar-nav main-menu nav-tabs">
+                    <li class="active"><a class="i18n" data-toggle="tab" href="#forecast">Forecast</a></li>
+                    <li><a class="i18n" data-toggle="tab" href="#description">Description</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="i18n">Settings</span> <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/?lang=en" class="i18n">English</a></li>
+                            <li><a href="/?lang=ru" class="i18n">Russian</a></li>
+                            <li><a href="/?lang=by" class="i18n">Belarussian</a></li>
+                            <li class="divider"></li>
+                            <!--<li><a href="#" class="i18n">About</a></li>-->
+                            <!--<li><a><input type="text" class="small-input" value="15"/><button>Ok</button></a></li>-->
+                            <li><a href="https://github.com/tapahbl4/neural-network" target="_blank"><span class="external-link i18n">See on Github</span></a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <article>
+        <div class="tab-content">
+            <div id="forecast" class="tab-pane fade in active">
+                <div class="container-fluid fixed-width">
+                    <div class="row">
+                        <div class="col-md-3 col-md-push-9 text-left">
+                            <div class="row">
+                                <div class="col-md-12 col-xs-4">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading"><b class="i18n">Wrong results</b></div>
+                                        <div class="panel-body">
+                                            <div class="row">
+                                                <div class="col-xs-8 wrong-answers">
+                                                    <span class="i18n">Loading</span>...
+                                                </div>
+                                                <div class="col-xs-4 text-right wrong-answers-p"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 col-xs-4">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading"><b class="i18n">Average error</b></div>
+                                        <div class="panel-body">
+                                            <div class="row">
+                                                <div class="col-xs-8 avg-error">
+                                                    <span class="i18n">Loading</span>...
+                                                </div>
+                                                <div class="col-xs-4 text-right avg-error-p"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 col-xs-4">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading"><b class="i18n">Tomorrow</b></div>
+                                        <div class="panel-body" style="padding: 0;">
+                                            <div class="row" style="margin: 0;">
+                                                <div class="col-xs-8 tomorrow-forecast" style="padding: 15px;">
+                                                    <span class="i18n">Loading</span>...
+                                                </div>
+                                                <div class="col-xs-4 text-right tomorrow-forecast-p"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-9 col-md-pull-3">
+                            <canvas id="test-chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="description" class="tab-pane fade">
+                <div class="container-fluid fixed-width">
+                    <p>
+                        <span class="i18n">This site is a visualization of the work of a neural network.</span><br>
+                        <span class="i18n">Developed for the thesis project Dmitry S. Marchenko, 4th year student of the BV group, specialty "Informatics", the Faculty of Mathematics and Natural Sciences, Mogilev State University named after Kuleshov</span>
+                    </p>
+                    <table class="table table-hover">
+                        <caption class="i18n">The main characteristics of the neural network</caption>
+                        <thead>
+                            <tr>
+                                <th class="i18n">Characteristic</th>
+                                <th class="i18n">Value</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="i18n">Neural Network Architecture</td>
+                                <td class="i18n">Multilayer Perceptron</td>
+                            </tr>
+                            <tr>
+                                <td class="i18n">Learning Algorithm</td>
+                                <td class="i18n">Method of back propagation error</td>
+                            </tr>
+                            <tr>
+                                <td class="i18n">Activation function</td>
+                                <td class="i18n">The sigmoidal function with an interval of values (-1; 1)</td>
+                            </tr>
+                            <tr>
+                                <td class="i18n">Input data</td>
+                                <td class="i18n">Time series of dollar exchange rate increments</td>
+                            </tr>
+                            <tr>
+                                <td class="i18n">Output data</td>
+                                <td class="i18n">The increment relative to the last dollar value</td>
+                            </tr>
+                            <tr>
+                                <td class="i18n">Data source</td>
+                                <td class="i18n">The values of the stock exchange, received via the API <a href="http://nbrb.by/" class="external-link" _target="blank">NBRB site</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </article>
+    <footer>
+        <div class="container-fluid fixed-width">
+            <div class="row">
+                <div class="col-xs-12 text-right">
+                    <span class="glyphicon glyphicon-copyright-mark" area-hidden="true"></span> <a href="https://github.com/tapahbl4" target="_blank" class="external-link i18n">Dmitry Marchenko</a>, 2017
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

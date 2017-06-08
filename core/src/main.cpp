@@ -10,6 +10,12 @@
 
 using namespace std;
 
+
+/**
+ * Load data from text file
+ * @param  filename File name with path
+ * @return          String vector of data
+ */
 ListDouble loadData(string filename) {
     ifstream file(filename);
     ListDouble result;
@@ -20,6 +26,12 @@ ListDouble loadData(string filename) {
     return result;
 }
 
+/**
+ * Main function
+ * @param  argc Arguments count
+ * @param  argv Arguments array
+ * @return      Exit code
+ */
 int main(int argc, char** argv) {
     bool learn = false, test = false, process = false;
     double speed = 0;
@@ -27,7 +39,7 @@ int main(int argc, char** argv) {
     string inputfile="", outputfile="stdout", datafile="";
     for (int i=1; i<argc; i++) {
         if (strcmp(argv[i], "--version")==0 || strcmp(argv[i], "-v")==0) {
-            cout << "v0.0.1\nDmitry Marchenko" << endl;
+            cout << "v0.0.2\nDmitry Marchenko" << endl;
             return EXIT_SUCCESS;
         }
         if (strcmp(argv[i], "--help")==0 || strcmp(argv[i], "-h")==0) {
@@ -76,14 +88,16 @@ int main(int argc, char** argv) {
             continue;
         }
     }
-    // run with cli params
+    // Running with CLI params
     NeuralNetwork* network = new NeuralNetwork();
     network->loadFromFile(inputfile, false);
     if (learn) {
         ListDouble data = loadData(datafile);
         LearningBackPropagation* learning = new LearningBackPropagation(network);
         learning->start(data, speed, iteration!=0 ? iteration : data.size(), printlog);
-        network->saveToFile(outputfile);
+        if (outputfile!="stdout") {
+            network->saveToFile(outputfile);
+        }
     }
     if (test) {
         ListDouble data = loadData(datafile);

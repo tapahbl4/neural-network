@@ -8,6 +8,7 @@ LearningBackPropagation::LearningBackPropagation(NeuralNetwork* target) {
 void LearningBackPropagation::start(ListDouble data, double s, unsigned _iterationCount, unsigned printLog = 0) {
     learnData = data;
     speed = s;
+    error = 0;
     if (learnData.size()<_iterationCount) {
         cout << "data vector length less than iteration count" << endl;
         cout << learnData.size() << endl;
@@ -41,6 +42,8 @@ void LearningBackPropagation::iteration(ListDouble input, ListDouble teacher) {
             double err;
             if (i+1==network->getLayersCount()) {
                 err = (teacher[j] - output[j])*derivatives[j];
+                summaryError += (teacher[j] - output[j])*(teacher[j] - output[j]);
+                error = sqrt(summaryError / currentIteration)*100;
             }
             else {
                 err = err_sum_prev * derivatives[j];
@@ -69,16 +72,15 @@ double LearningBackPropagation::test(ListDouble testData) {
         ListDouble output = network->getOutput();
         double sum = 0;
         for (unsigned j=0; j<output.size(); j++) {
-            sum += (output[j]-test[j])*(output[j]-test[j]);
+            sum += (test[j]-output[j])*(test[j]-output[j]);
         }
-        sum /= output.size();
+        sum /= (double) output.size();
         global_sum += sum;
     }
-    global_sum /= testCount;
+    global_sum /= (double) testCount;
     return sqrt(global_sum)*100;
 }
 
 void LearningBackPropagation::log() {
-    // cout << "Iteration " << currentIteration << ", (speed: " << speed << ", error: " << summaryError/currentIteration*100 << ")" << endl;
-    cout << "Iteration " << currentIteration << ", (speed: " << speed << ")" << endl;
+    cout << "Iteration " << currentIteration << ", (speed: " << speed << ", error: " << error << ")" << endl;
 }

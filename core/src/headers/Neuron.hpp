@@ -19,35 +19,140 @@ private:
     ListDoubleP input;
     ListDouble  weight;
 public:
-    /* constructor */
+    /* Constructors */
     Neuron();
     Neuron(ListDoubleP, ListDouble, double);
-    /* input */
+
+    /**
+     * [getInput description]
+     * @return [description]
+     */
     ListDoubleP getInput();
+
+    /**
+     * [getInputAt description]
+     * @param  unsigned [description]
+     * @return          [description]
+     */
     double* getInputAt(unsigned);
+
+    /**
+     * [setInput description]
+     * @param ListDoubleP [description]
+     */
     void setInput(ListDoubleP);
+
+    /**
+     * [setInputAt description]
+     * @param unsigned [description]
+     * @param [name]   [description]
+     */
     void setInputAt(unsigned, double*);
-    /* bias */
+
+    /**
+     * [getBias description]
+     * @return [description]
+     */
     double getBias();
+
+    /**
+     * [setBias description]
+     * @param double [description]
+     */
     void setBias(double);
+
+    /**
+     * [correctBias description]
+     * @param double [description]
+     */
     void correctBias(double);
-    /* weight */
+
+    /**
+     * [getWeight description]
+     * @return [description]
+     */
     ListDouble getWeight();
+
+    /**
+     * [getWeightAt description]
+     * @param  unsigned [description]
+     * @return          [description]
+     */
     double getWeightAt(unsigned);
+
+    /**
+     * [setWeight description]
+     * @param ListDouble [description]
+     */
     void setWeight(ListDouble);
+
+    /**
+     * [setWeightAt description]
+     * @param unsigned [description]
+     * @param double   [description]
+     */
     void setWeightAt(unsigned, double);
+
+    /**
+     * [setWeightAdd description]
+     * @param double [description]
+     */
     void setWeightAdd(double);
+
+    /**
+     * [correctWeightAt description]
+     * @param unsigned [description]
+     * @param double   [description]
+     */
     void correctWeightAt(unsigned, double);
-    /* output */
+
+    /**
+     * [getOutputPointer description]
+     * @return [description]
+     */
     double* getOutputPointer();
+
+    /**
+     * [getOutputValue description]
+     * @return [description]
+     */
     double getOutputValue();
-    /* body */
+
+    /**
+     * [summator description]
+     * @return [description]
+     */
     double summator();
+
+    /**
+     * [activator description]
+     * @param  double [description]
+     * @return        [description]
+     */
     double activator(double);
+
+    /**
+     * [derivative description]
+     * @param  double [description]
+     * @return        [description]
+     */
     double derivative(double);
+
+    /**
+     * [getSummatorValue description]
+     * @return [description]
+     */
     double getSummatorValue();
-    /* other */
+
+    /**
+     * [getLength description]
+     * @return [description]
+     */
     unsigned getLength();
+
+    /**
+     * [process description]
+     */
     void process();
 };
 
