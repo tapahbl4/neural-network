@@ -1,27 +1,26 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python3.5
 # -*- coding: UTF-8 -*-
+import cgi
 import cgitb
 import json
 import subprocess
-# import time # TODO: Remove
-cgitb.enable()
 
-file_currency = open("data/currency.txt", "r")
+def print_result(array_result, content_type = 'text/plain', charset = 'utf-8'):
+    cgitb.enable()
+    print("Content-Type: " + content_type + ";charset=" + charset + "\n")
+    print(json.dumps(array_result[schema_input:]))
 
-schema_input = 5
-days = 15
-
-array_currency = []
-
-for item in file_currency:
-    arr = item.split()
-    in_arr = {'date': arr[0], 'value': arr[1], 'fraction': arr[2]}
-    array_currency.append(in_arr)
-file_currency.close()
-
-array_last = array_currency[-(schema_input + days):]
-nn_answer = []
-for item in array_last[schema_input:]:
+def read_currency(file):
+    result_array = []
+    for item in file:
+        arr = item.split()
+        in_arr = {'date': arr[0], 'value': arr[1], 'fraction': arr[2]}
+        result_array.append(in_arr)
+    file.close()
+    result_array.append({'date': 'tomorrow', 'value': '0', 'fraction': '0'})
+    return result_array
+    
+def generate_result_item(item, array_last):
     item_pos = array_last.index(item)
     for_write = array_last[item_pos - schema_input:item_pos]
     file_process = open('data/data_process.txt', 'w')
@@ -30,15 +29,28 @@ for item in array_last[schema_input:]:
     file_process.close()
     process_cmd =  '../core/bin/nn --process -d data/data_process.txt -i data/schema_output.txt'
     result = subprocess.run(process_cmd.split(), stdout = subprocess.PIPE)
-    nn_answer.append(result.stdout.decode('utf-8')[:-2])
+    return result.stdout.decode('utf-8')[:-2]
+    
+def generate_result(array_currency):
+    array_last = array_currency[-(schema_input + days):]
+    nn_answer = []
+    for item in array_last[schema_input:]:
+        nn_answer.append(generate_result_item(item, array_last))
+    # nn_answer.append(generate_result_item({}, array_last))
+    prev = float(array_last[schema_input-1]['value'])
+    for item in array_last[schema_input:]:
+        item_pos = array_last.index(item)
+        item.update({'forecast': str(round(float(prev) * (float(nn_answer[item_pos-schema_input])+1), 4))})
+        prev = float(array_last[schema_input-1]['value'])
+        item['fraction'] = nn_answer[item_pos-schema_input]
+    return array_last
 
-prev = float(array_last[schema_input-1]['value'])
-for item in array_last[schema_input:]:
-    item_pos = array_last.index(item)
-    prev *= float(nn_answer[item_pos-schema_input])
-    item.update({'forecast': str(round(float(prev) * float(nn_answer[item_pos-schema_input]), 4))})
-    item['fraction'] = nn_answer[item_pos-schema_input] # abs(float(item['fraction'])-float(item['forecast']))
-    # del item['fraction']
+arguments = cgi.FieldStorage()
+schema_input = int(arguments['input'].value if 'input' in arguments.keys() else 5)
+days = int(arguments['days'].value if ('days' in arguments.keys()) else 15)
 
-print("Content-Type: text/plain;charset=utf-8\n")
-print(json.dumps(array_last[schema_input:]))
+
+file_currency = open("data/currency.txt", "r")
+array_currency = read_currency(file_currency)
+array_result = generate_result(array_currency)
+print_result(array_result)

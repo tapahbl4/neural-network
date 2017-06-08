@@ -8,7 +8,9 @@ myfile2 = open('data/data_learn.txt', 'w')
 prev = -1
 cur_id = 145 # код требуемой валюты
 apiroot = 'http://www.nbrb.by/API/ExRates/Rates/Dynamics/'
-for i in range(2014, 2018):
+curr = []
+n_classes = 10
+for i in range(2010, 2018):
     print(i)
     r = requests.get(apiroot + str(cur_id) + '?startDate=01/01/' + str(i) + '&endDate=01/01/' + str(i + 1))
     full_list = json.loads(r.text)
@@ -19,10 +21,11 @@ for i in range(2014, 2018):
         full_list.append(f1[0])
     for j in full_list:
         if prev != -1:
-            cur_str = str(j['Cur_OfficialRate'] / prev)
+            cur_str = str((j['Cur_OfficialRate'] / prev) - 1)
             date_f = j['Date'].split('T')[0]
             myfile.write(date_f + ' ' + str(j['Cur_OfficialRate']) + ' ' + cur_str + '\n')
             myfile2.write(cur_str + '\n')
+            curr.append({'date': date_f, 'value' : (j['Cur_OfficialRate'] / prev) - 1})
         prev = j['Cur_OfficialRate']
         if j['Date'] == '2015-12-31T00:00:00':
             print('деноминация')
